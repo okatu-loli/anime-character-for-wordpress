@@ -362,215 +362,150 @@ function anime_character_shortcode($atts) {
     ob_start();
     ?>
     <div class="anime-card-qianshi-characters">
-    <?php
-    $args = array(
-        'post_type' => 'anime_character',
-        'posts_per_page' => -1,
-    );
-    $query = new WP_Query($args);
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            $character_id = get_the_ID();
-            $character_name = get_the_title();
-            $moegirl_link = get_post_meta($character_id, 'anime_character_moegirl_link', true);
-            $image = get_post_meta($character_id, 'anime_character_image', true);
-            $description = get_post_meta($character_id, 'anime_character_description', true);
-            $birthday = get_post_meta($character_id, 'anime_character_birthday', true);
-            $gender = get_post_meta($character_id, 'anime_character_gender', true);
-            $gender = ($gender === 'male') ? '男' : (($gender === 'female') ? '女' : '其他');
-            ?>
-            <div class="card">
-                <div class="card-image">
-                    <div class="loading-overlay">
-                        <div class="loading-animation">
-                            <div class="circle"></div>
-                            <p>少女祈祷中...</p>
+        <?php
+        $args = array(
+            'post_type' => 'anime_character',
+            'posts_per_page' => -1,
+        );
+        $query = new WP_Query($args);
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $character_id = get_the_ID();
+                $character_name = get_the_title();
+                $moegirl_link = get_post_meta($character_id, 'anime_character_moegirl_link', true);
+                $image = get_post_meta($character_id, 'anime_character_image', true);
+                $description = get_post_meta($character_id, 'anime_character_description', true);
+                $birthday = get_post_meta($character_id, 'anime_character_birthday', true);
+                $gender = get_post_meta($character_id, 'anime_character_gender', true);
+                $gender = ($gender === 'male') ? '男' : (($gender === 'female') ? '女' : '其他');
+                ?>
+                <div class="card" onclick="window.location.href='<?php echo esc_url($moegirl_link); ?>'">
+                    <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_html($character_name); ?>">
+                    <div class="overlay">
+                        <div class="name">
+                            <?php echo esc_html($character_name); ?>
+                        </div>
+                        <div class="overlay-content">
+                            <p>生日: <?php echo esc_html($birthday); ?></p>
+                            <p>性别: <?php echo esc_html($gender); ?></p>
+                            <p>简介: <?php echo esc_html($description); ?></p>
                         </div>
                     </div>
-                    <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_html($character_name); ?>" onload="hideLoading(this)" onerror="hideLoading(this)">
-                    <div class="name-overlay">姓名: <?php echo esc_html($character_name); ?></div>
                 </div>
-                <div class="card-content">
-                    <p>生日: <?php echo esc_html($birthday); ?></p>
-                    <p>性别: <?php echo esc_html($gender); ?></p>
-                    <a href="<?php echo esc_url($moegirl_link); ?>">萌娘百科</a>
-                    <p class="description"><?php echo esc_html($description); ?></p>
-                </div>
-            </div>
-            <?php
-        }
-        wp_reset_postdata();
-    } else {
-        echo '<p>未找到动漫角色。</p>';
-    }
-    ?>
-</div>
-<style>
-.anime-card-qianshi-characters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px; /* 添加间距 */
-}
-
-.card {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    width: 200px; /* 设置初始宽度 */
-    max-width: 600px;
-    transition: width 0.3s ease, max-width 0.3s ease;
-}
-
-.card-image {
-    position: relative;
-    flex: 0 0 200px;
-    height: 300px; /* 设置初始高度 */
-    cursor: pointer;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%; /* 确保图片高度填充 */
-    object-fit: cover; /* 确保图片按比例填充 */
-}
-
-.loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-.loading-animation {
-    text-align: center;
-    color: white;
-}
-
-.circle {
-    width: 50px;
-    height: 50px;
-    border: 5px solid transparent;
-    border-top: 5px solid #fff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.name-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    text-align: center;
-    padding: 8px 0;
-    font-size: 16px;
-}
-
-.card-content {
-    width: 0;
-    height: 100%;
-    background-color: #fff;
-    overflow-y: hidden;
-    transition: width 0.3s ease, height 0.3s ease;
-    padding: 16px;
-    box-sizing: border-box;
-    display: none;
-}
-
-.card-content.open {
-    width: calc(100% - 200px);
-    overflow-y: auto;
-    display: block;
-}
-
-.card-content p {
-    margin: 4px 0;
-}
-
-.card-content a {
-    display: block;
-    margin: 8px 0;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.card-content a:hover {
-    text-decoration: underline;
-}
-
-.description {
-    margin-top: 12px;
-    padding: 8px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-</style>
-<script>
-function hideLoading(imgElement) {
-    const loadingOverlay = imgElement.closest('.card-image').querySelector('.loading-overlay');
-    loadingOverlay.style.display = 'none';
-}
-
-document.querySelectorAll('.card-image').forEach(cardImage => {
-    cardImage.addEventListener('click', function() {
-        const cardContent = cardImage.nextElementSibling;
-        const card = cardImage.closest('.card');
-        if (cardContent.classList.contains('open')) {
-            cardContent.classList.remove('open');
-            cardContent.style.display = 'none';
-            card.style.width = '200px';
+                <?php
+            }
+            wp_reset_postdata();
         } else {
-            cardContent.classList.add('open');
-            cardContent.style.display = 'block';
-            card.style.width = '600px';
-            adjustCardContentHeight(cardContent, cardImage);
+            echo '<p>未找到动漫角色。</p>';
         }
-    });
-});
+        ?>
+    </div>
+    <style>
+        .anime-card-qianshi-characters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px; /* 设置卡片之间的间距 */
+            justify-content: center; /* 居中对齐 */
+        }
 
-function adjustCardContentHeight(cardContent, cardImage) {
-    cardContent.style.height = cardImage.offsetHeight + 'px';
-}
+        .card {
+            width: 214px;
+            height: 285.33px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+            flex-shrink: 0; /* 防止卡片缩小 */
+        }
 
-// 设置 card-content 的高度与 card-image 相同
-window.addEventListener('load', () => {
-    document.querySelectorAll('.card').forEach(card => {
-        const cardImage = card.querySelector('.card-image');
-        const cardContent = card.querySelector('.card-content');
-        adjustCardContentHeight(cardContent, cardImage);
-    });
-});
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-// 窗口调整时同步高度
-window.addEventListener('resize', () => {
-    document.querySelectorAll('.card').forEach(card => {
-        const cardImage = card.querySelector('.card-image');
-        const cardContent = card.querySelector('.card-content');
-        adjustCardContentHeight(cardContent, cardImage);
-    });
-});
-</script>
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            height: 30px; /* 初始高度只显示姓名 */
+            overflow: hidden;
+            transition: height 0.5s ease-in-out; /* 更优雅的动画 */
+        }
+
+        .card:hover .overlay {
+            height: 100%;
+        }
+
+        .overlay-content {
+            position: absolute;
+            top: 30px; /* 初始状态下内容紧跟在姓名之后 */
+            bottom: 2%;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            max-height: calc(100% - 30px); /* 确保内容不会超出遮罩层 */
+            overflow-y: auto;
+        }
+
+        .card:hover .overlay-content {
+            top: 30px; /* 鼠标悬停时，内容上升到距离顶部30px的位置 */
+        }
+
+        .overlay-content p {
+            margin: 5px 0;
+        }
+
+        .name {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 30px;
+            line-height: 30px;
+            transition: top 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .card:hover .name {
+            top: 10%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        /* 媒体查询 */
+        @media (max-width: 1200px) {
+            .card {
+                width: 180px;
+                height: 240px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .card {
+                width: 160px;
+                height: 213px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 140px;
+                height: 186px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                width: 120px;
+                height: 160px;
+            }
+        }
+    </style>
     <?php
     return ob_get_clean();
 }
-add_shortcode('anime_characters', 'anime_character_shortcode');
-?>
+add_shortcode('anime_character', 'anime_character_shortcode');
