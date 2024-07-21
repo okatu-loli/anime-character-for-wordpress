@@ -16,7 +16,7 @@
 
 点击图片可以切换详细信息
 
-![image](https://github.com/user-attachments/assets/b33193e1-5621-4253-9540-7548579eab04)
+![image](screenshot-4.png)
 
 ## TODO
 - [ ] 增加爬虫，输入角色名自动补全角色信息
