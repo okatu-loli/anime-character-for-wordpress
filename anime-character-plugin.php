@@ -357,7 +357,6 @@ function delete_anime_character() {
 }
 add_action('wp_ajax_delete_anime_character', 'delete_anime_character');
 
-// 创建短代码
 function anime_character_shortcode($atts) {
     ob_start();
     ?>
@@ -405,8 +404,8 @@ function anime_character_shortcode($atts) {
         .anime-card-qianshi-characters {
             display: flex;
             flex-wrap: wrap;
-            gap: 60px; /* 设置卡片之间的间距 */
-            justify-content: center; /* 居中对齐 */
+            gap: 60px;
+            justify-content: center;
         }
 
         .card {
@@ -417,7 +416,7 @@ function anime_character_shortcode($atts) {
             position: relative;
             cursor: pointer;
             transition: transform 0.3s;
-            flex-shrink: 0; /* 防止卡片缩小 */
+            flex-shrink: 0;
         }
 
         .card img {
@@ -433,9 +432,9 @@ function anime_character_shortcode($atts) {
             right: 0;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            height: 30px; /* 初始高度只显示姓名 */
+            height: 30px;
             overflow: hidden;
-            transition: height 0.5s ease-in-out; /* 更优雅的动画 */
+            transition: height 0.5s ease-in-out;
         }
 
         .card:hover .overlay {
@@ -444,20 +443,22 @@ function anime_character_shortcode($atts) {
 
         .overlay-content {
             position: absolute;
-            top: 30px; /* 初始状态下内容紧跟在姓名之后 */
+            top: 30px;
             bottom: 2%;
             left: 0;
             right: 0;
             padding: 10px;
-            max-height: calc(100% - 30px); /* 确保内容不会超出遮罩层 */
+			    color: white;
+            max-height: calc(100% - 30px);
             overflow-y: auto;
         }
 
         .card:hover .overlay-content {
-            top: 30px; /* 鼠标悬停时，内容上升到距离顶部30px的位置 */
+            top: 30px;
         }
 
         .overlay-content p {
+			    color: white;
             margin: 5px 0;
         }
 
@@ -476,7 +477,6 @@ function anime_character_shortcode($atts) {
             transform: translateX(-50%) translateY(-50%);
         }
 
-        /* 媒体查询 */
         @media (max-width: 1200px) {
             .card {
                 width: 180px;
