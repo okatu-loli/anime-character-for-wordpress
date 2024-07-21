@@ -4,12 +4,16 @@ Donate link: https://cnqs.moe/sponsor/
 Tags: anime, character, management, shortcode
 Requires at least: 5.0
 Tested up to: 6.6
+Requires PHP: 7.4
 Stable tag: 1.0
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 动漫角色管理插件允许您在WordPress中创建和管理动漫角色，并使用短代码在前端展示这些角色。
+
+== Short Description ==
+一个用于管理和展示动漫角色的插件。
 
 == Installation ==
 1. 上传插件文件到 `/wp-content/plugins/anime-character-management` 目录，或者通过WordPress插件屏幕直接安装插件。
