@@ -8,12 +8,11 @@ Requires PHP: 7.4
 Stable tag: 1.0
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Requires Plugins: CMB2
 
+一个用于管理和展示动漫角色的插件。
 == Description ==
 动漫角色管理插件允许您在WordPress中创建和管理动漫角色，并使用短代码在前端展示这些角色。
-
-== Short Description ==
-一个用于管理和展示动漫角色的插件。
 
 == Installation ==
 1. 上传插件文件到 `/wp-content/plugins/anime-character-management` 目录，或者通过WordPress插件屏幕直接安装插件。
@@ -29,10 +28,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 使用短代码 `[anime_character]` 在页面或文章中插入角色展示。
 
 == Screenshots ==
-1. screenshot-1.png - 动漫角色管理页面。
-2. screenshot-2.png - 添加新角色页面。
-3. screenshot-3.png - 前端展示角色的效果。
-4. screenshot-4.png - 前端展示角色详细信息的效果。
+1. screenshot-1.png – 动漫角色管理页面。
+2. screenshot-2.png – 添加新角色页面。
+3. screenshot-3.png – 前端展示角色的效果。
+4. screenshot-4.png – 前端展示角色详细信息的效果。
 
 == Changelog ==
 = 1.0 =
