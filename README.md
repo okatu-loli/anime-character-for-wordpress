@@ -8,11 +8,11 @@
 ```bash
 [anime_characters]
 ```
-![image](https://github.com/user-attachments/assets/9483319b-60cc-4b38-a203-2d85844ce63b)
+![image](screenshot-1.png)
 
-![image](https://github.com/user-attachments/assets/1311977b-6cbc-464a-9324-eab139b87ef9)
+![image](screenshot-2.png)
 
-![image](https://github.com/user-attachments/assets/449db9f8-48e1-41a3-8086-73cb5fad3ffc)
+![image](screenshot-3.png)
 
 点击图片可以切换详细信息
 
